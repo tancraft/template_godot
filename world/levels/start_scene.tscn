@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://tsh80k0p348v"]
+
+[ext_resource type="Script" path="res://assets/shared/scripts/turnAround.gd" id="1_0g1br"]
+[ext_resource type="PackedScene" uid="uid://c1tamj7n6rwe8" path="res://assets/shared/scenes/UI/startMenu.tscn" id="2_f1tjy"]
+[ext_resource type="PackedScene" uid="uid://ublcdqu3megy" path="res://world/environment.tscn" id="3_cx57b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlmpx"]
+albedo_color = Color(0.345098, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_76o3f"]
+size = Vector3(3, 5, 3)
+
+[node name="StartScene" type="Node3D"]
+
+[node name="BlueBlock" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hlmpx")
+mesh = SubResource("BoxMesh_76o3f")
+skeleton = NodePath("")
+script = ExtResource("1_0g1br")
+
+[node name="Environment" parent="." instance=ExtResource("3_cx57b")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96974, 0.24414, 0, -0.24414, 0.96974, 0, 1.62811, 7.11655)
+
+[node name="start_menu_interface" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="start_menu_interface" instance=ExtResource("2_f1tjy")]
+offset_top = -132.0
+offset_bottom = 132.0

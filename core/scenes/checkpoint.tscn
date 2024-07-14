@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwfi6023dnynt"]
+
+[ext_resource type="Script" path="res://core/scripts/Checkpoint.gd" id="1_gigoc"]
+[ext_resource type="Texture2D" uid="uid://cj6gdrgti7dns" path="res://assets/icon.svg" id="2_44aq8"]
+
+[node name="Checkpoint" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.65391, -8.77618)
+script = ExtResource("1_gigoc")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_44aq8")

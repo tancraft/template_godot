@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgw0wbs8x8w8g"]
+
+[ext_resource type="Script" path="res://core/scripts/world.gd" id="1_oyjdc"]
+[ext_resource type="PackedScene" uid="uid://ublcdqu3megy" path="res://world/environment.tscn" id="2_0ffa2"]
+[ext_resource type="PackedScene" uid="uid://1kd4705ohr78" path="res://core/scenes/level.tscn" id="2_2hh4h"]
+[ext_resource type="PackedScene" uid="uid://bs8gjat1i0crd" path="res://assets/shared/scenes/UI/userInfos.tscn" id="3_21ljk"]
+[ext_resource type="PackedScene" uid="uid://duax4mscnlnsn" path="res://assets/shared/scenes/UI/miniMap.tscn" id="4_1cvh1"]
+[ext_resource type="PackedScene" uid="uid://df0kwrfnbhf51" path="res://assets/shared/scenes/UI/pauseMenu.tscn" id="5_xkwqf"]
+[ext_resource type="PackedScene" uid="uid://bgve8rcbuymw6" path="res://core/entities/player/player.tscn" id="7_i41cx"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_oyjdc")
+
+[node name="Environment" parent="." instance=ExtResource("2_0ffa2")]
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0.000436336, 0, -0.000436336, 1, 0, 8.35641, -0.025051)
+
+[node name="Level" parent="." instance=ExtResource("2_2hh4h")]
+
+[node name="Player" parent="." instance=ExtResource("7_i41cx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.60437, 0)
+
+[node name="MeshInstance3D4" parent="Player/Character_body/MeshInstance3D" index="1"]
+transform = Transform3D(1, 1.42108e-14, -2.68221e-07, 1.77636e-14, 1, 1.19209e-07, 2.68221e-07, -1.19209e-07, 1, -0.772718, -0.154407, -0.194233)
+
+[node name="RemoteTransform3D" parent="Player/Camera_controller/SpringArm3D" index="0"]
+remote_path = NodePath("../../../../MainCamera")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MainUi" parent="UI" instance=ExtResource("3_21ljk")]
+
+[node name="MiniMap" parent="UI" instance=ExtResource("4_1cvh1")]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("5_xkwqf")]
+
+[editable path="Player"]

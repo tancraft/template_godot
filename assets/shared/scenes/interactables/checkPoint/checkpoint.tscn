@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5wicd62cfjvs"]
+
+[ext_resource type="Script" path="res://assets/shared/scripts/checkpoint.gd" id="1_5vhju"]
+[ext_resource type="Texture2D" uid="uid://dfb6witcwbmw7" path="res://assets/shared/images/Fichier 11.png" id="2_fbuni"]
+[ext_resource type="Script" path="res://assets/shared/scripts/turnAround.gd" id="3_majny"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bdkb6"]
+radius = 1.963
+
+[node name="Checkpoint" type="Area3D"]
+collision_mask = 2
+script = ExtResource("1_5vhju")
+checkpoint_marker = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.772709, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Marker3D"]
+texture = ExtResource("2_fbuni")
+script = ExtResource("3_majny")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.999358, 0)
+shape = SubResource("CylinderShape3D_bdkb6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

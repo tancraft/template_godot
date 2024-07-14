@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs8gjat1i0crd"]
+
+[ext_resource type="Script" path="res://core/scripts/UI/userInfos.gd" id="1_4go3p"]
+
+[node name="MainUi" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4go3p")
+
+[node name="CoinsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 21.0
+offset_right = 67.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 50
+text = "Coins:"
+
+[node name="NumberCoinsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 23.0
+offset_right = 230.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="HPlabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 98.0
+offset_right = 58.0
+offset_bottom = 167.0
+theme_override_font_sizes/font_size = 50
+text = "0"

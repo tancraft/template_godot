@@ -1,0 +1,135 @@
+[gd_scene load_steps=16 format=3 uid="uid://drxohr57f5pu8"]
+
+[ext_resource type="MeshLibrary" uid="uid://cqil5lguh2ijo" path="res://assets/models/resources/blocks-library.tres" id="1_6aadl"]
+[ext_resource type="Script" path="res://scenes/levels/Level1.gd" id="1_op0fl"]
+[ext_resource type="PackedScene" uid="uid://bwqaumbpxbxub" path="res://scenes/objects/block.tscn" id="2_fci0f"]
+[ext_resource type="Script" path="res://scripts/mobilPlatform.gd" id="3_4ywrj"]
+[ext_resource type="PackedScene" uid="uid://bh4mqsswcxmcm" path="res://scenes/objects/Platform.tscn" id="4_q570k"]
+[ext_resource type="PackedScene" uid="uid://y62ndpu4ksfx" path="res://scenes/items/coin.tscn" id="5_vieqh"]
+[ext_resource type="PackedScene" uid="uid://bje0w6augh4fq" path="res://scenes/entities/player.tscn" id="6_ff52j"]
+[ext_resource type="PackedScene" uid="uid://bs8gjat1i0crd" path="res://scenes/UI/mainUI.tscn" id="7_gsusm"]
+[ext_resource type="Script" path="res://scripts/FallZone.gd" id="8_b3e8q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tow1j"]
+sky_top_color = Color(0.313726, 0.627451, 0.745098, 1)
+sky_horizon_color = Color(0.784314, 0.803922, 0.819608, 1)
+ground_bottom_color = Color(0.247059, 0.603922, 0.411765, 1)
+ground_horizon_color = Color(0.784314, 0.803922, 0.819608, 1)
+
+[sub_resource type="Sky" id="Sky_t7yb8"]
+sky_material = SubResource("ProceduralSkyMaterial_tow1j")
+
+[sub_resource type="Environment" id="Environment_t16fx"]
+background_mode = 2
+sky = SubResource("Sky_t7yb8")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.89
+ssr_enabled = true
+ssao_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_p7fhm"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.528694, 0.0826364, -0.00508285, 0, 0, 0, 0, 0, 0, 7.32117, 0.049386, 4.41074e-05, 0, 0, 0, 0, 0, 0, -0.541462, 0.0826364, 4.41074e-05),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="Curve3D" id="Curve3D_n648y"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0221181, -0.0785649, -0.761631, 0, 0, 0, 0, 0, 0, 0.0221181, 9.80008, -0.675503, 0, 0, 0, 0, 0, 0, 0.0221181, -0.0809138, -0.761631),
+"tilts": PackedFloat32Array(0.88101, 0, -0.893641)
+}
+point_count = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lyv68"]
+size = Vector3(94.7046, 5, 90)
+
+[node name="Level1" type="Node3D"]
+script = ExtResource("1_op0fl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t16fx")
+
+[node name="GridMap" type="GridMap" parent="WorldEnvironment"]
+mesh_library = ExtResource("1_6aadl")
+data = {
+"cells": PackedInt32Array(-2, 2, 655360, -1, 2, 655360, -65536, 2, 655360, -65536, 1, 655360, -1, 1, 655360, -3, 2, 655360, -2, 1, 655360, -3, 1, 655360, -3, 0, 655360, -2, 0, 655360, -1, 0, 655360, -1, 65535, 655360, -65536, 65535, 655360, -65535, 65535, 655360, -65535, 0, 655360, -65535, 1, 655360, -65535, 2, 655360, -65535, 3, 655360, -65535, 4, 655360, -65536, 4, 655360, -1, 4, 655360, -2, 4, 655360, -3, 4, 655360, -3, 3, 655360, -2, 3, 655360, -1, 3, 655360, -65536, 3, 655360, -4, 3, 655360, -4, 2, 655360, -4, 1, 655360, -3, 65535, 655360, -2, 65535, 655360, -1, 65534, 655360, -65536, 65534, 655360, -65535, 65534, 655360, -2, 65534, 655360, -3, 65534, 655360, -4, 65535, 655360, -4, 0, 655360, -4, 65534, 655360, -4, 65533, 655364, -3, 65533, 655364, -2, 65533, 655364, -1, 65533, 655364, -65536, 65533, 655364, -65535, 65533, 655364, -5, 4, 1441796, -5, 3, 1441796, -5, 2, 1441796, -5, 1, 1441796, -5, 0, 1441796, -5, 65535, 1441796, -5, 65534, 1441796, -5, 65533, 1441797, -65534, 65533, 655365, -65534, 5, 1048581, -5, 5, 5, -4, 5, 4, -3, 5, 4, -2, 5, 4, -1, 5, 4, -65536, 5, 4, -65535, 5, 4, -65534, 4, 1048580, -65534, 3, 1048580, -65534, 2, 1048580, -65534, 1, 1048580, -65534, 0, 1048580, 2, 65534, 1048578, 2, 65535, 1048578, 3, 65534, 1048577, 3, 65535, 1048577, 4, 65534, 1048576, 5, 65534, 1048576, 6, 65534, 1048576, 4, 65535, 1048576, 5, 65535, 1048576, 6, 65535, 1048576, -65536, 0, 1048576, -4, 4, 1048576, 65543, 65535, 1048576, 65544, 65535, 1048576, 65545, 65535, 1048576, 65546, 65535, 1048576, 65548, 65535, 1048576, 65549, 65535, 1048576, 65550, 65535, 1048576, 65551, 65535, 1048576, 65543, 65534, 1048576, 65544, 65534, 1048576, 65545, 65534, 1048576, 65546, 65534, 1048576, 65548, 65534, 1048576, 65549, 65534, 1048576, 65550, 65534, 1048576, 65551, 65534, 1048576, 65558, 65535, 0, 65558, 65534, 0, 65559, 65534, 0, 65559, 65535, 0, 393242, 65533, 0, 393242, 65534, 0, 393242, 65535, 0, 393243, 0, 0, 393244, 0, 0, 393244, 65535, 0, 393243, 65535, 0, 393244, 65534, 0, 393243, 65533, 0, 393243, 65534, 0, 393244, 65533, 0, 393244, 1, 4, 393243, 1, 4, 393242, 65532, 655364, 393243, 65532, 655364, 393244, 65532, 655364, 393245, 65533, 1048580, 393245, 65534, 1048580, 393245, 65535, 1048580, 393245, 0, 1048580, 393245, 1, 1048581, 393245, 65532, 655365, 393241, 1, 5, 393241, 65532, 1441797, 393242, 1, 4, 393242, 0, 0, 393241, 0, 1441796, 393241, 65533, 1441796)
+}
+metadata/_editor_floor_ = Vector3(0, 6, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.81369, 0.5813, 0, -0.5813, 0.81369, 0, 3.18033, 5.3758)
+shadow_enabled = true
+
+[node name="blocks" type="Node3D" parent="."]
+
+[node name="Block1" parent="blocks" instance=ExtResource("2_fci0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04091, 2.44191, -3.0984)
+
+[node name="Block2" parent="blocks" instance=ExtResource("2_fci0f")]
+transform = Transform3D(1, 0, 0, 0, 0.73469, 0.678403, 0, -0.678403, 0.73469, 28.4527, 5.35979, -2.37379)
+
+[node name="Block3" parent="blocks" instance=ExtResource("2_fci0f")]
+transform = Transform3D(0.735825, -0.677171, 0, 0.677171, 0.735825, 0, 0, 0, 1, -5.78871, 1.58257, -1.14787)
+
+[node name="Platforms" type="Node3D" parent="."]
+
+[node name="platform1" type="Path3D" parent="Platforms"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5282, 3.50565, -2.0623)
+curve = SubResource("Curve3D_p7fhm")
+script = ExtResource("3_4ywrj")
+speed = 0.1
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Platforms/platform1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.528694, 0.0826364, -0.00508285)
+rotation_mode = 0
+
+[node name="MobilPlatform" parent="Platforms/platform1/PathFollow3D" instance=ExtResource("4_q570k")]
+transform = Transform3D(7.55009e-08, -0.0256984, 0.99967, -1.14768e-10, 0.99967, 0.0256984, -1, -2.05498e-09, 7.5473e-08, 0, 0, 0)
+
+[node name="Platform2" type="Path3D" parent="Platforms"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 50.0891, 3.50386, -1.71421)
+curve = SubResource("Curve3D_n648y")
+script = ExtResource("3_4ywrj")
+speed = 0.2
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Platforms/Platform2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0221181, 8.66959, -0.685359)
+progress = 8.74744
+rotation_mode = 0
+
+[node name="Platform" parent="Platforms/Platform2/PathFollow3D" instance=ExtResource("4_q570k")]
+transform = Transform3D(4.9944e-09, 0.0150097, -0.999887, -3.25007e-06, -0.999887, -0.0150097, -1, 3.24978e-06, 4.37886e-08, 0, 0, 0)
+
+[node name="Coins" type="Node3D" parent="."]
+
+[node name="Coin1" parent="Coins" instance=ExtResource("5_vieqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.18858, 2.86073, -2.11293)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("5_vieqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46994, 1, -0.183776)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("5_vieqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9388, 4.66814, -1.30102)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("5_vieqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.294, 2.84845, -1.79704)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("5_vieqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7525, 4.64317, -1.28729)
+
+[node name="Player" parent="." instance=ExtResource("6_ff52j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.32796, 1, 8.44803)
+sens = null
+
+[node name="MainUi" parent="." instance=ExtResource("7_gsusm")]
+
+[node name="FallZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.17818, 0)
+script = ExtResource("8_b3e8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FallZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.6477, -4.04675, 0)
+shape = SubResource("BoxShape3D_lyv68")
+
+[connection signal="body_entered" from="FallZone" to="Player" method="_on_fall_zone_body_entered"]

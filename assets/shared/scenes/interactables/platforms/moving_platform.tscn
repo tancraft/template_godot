@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://br1k113awdqny"]
+
+[ext_resource type="Script" path="res://assets/shared/scripts/moving_platform.gd" id="1_8dmhd"]
+[ext_resource type="PackedScene" uid="uid://bk6ubf6tgkql6" path="res://assets/shared/models/platform.glb" id="2_2rxcn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b48uw"]
+size = Vector3(4.10291, 0.540332, 4.03711)
+
+[sub_resource type="Animation" id="Animation_ljxc7"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_qn6sn"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow3D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.55, 0.435275),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_olruo"]
+_data = {
+"RESET": SubResource("Animation_ljxc7"),
+"move": SubResource("Animation_qn6sn")
+}
+
+[node name="MovingPlatform" type="Path3D"]
+script = ExtResource("1_8dmhd")
+metadata/_edit_group_ = true
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182953, 0.0905914, -0.0356936)
+rotation_mode = 0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PathFollow3D"]
+remote_path = NodePath("../../AnimatableBody3D")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0182953, 0.0905914, -0.0356936)
+
+[node name="platform" parent="AnimatableBody3D" instance=ExtResource("2_2rxcn")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00360107, -0.0379393, 0.0185547)
+shape = SubResource("BoxShape3D_b48uw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_olruo")
+}
